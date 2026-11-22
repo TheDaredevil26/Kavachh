@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:8000"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      name: "Warm up"
+    - duration: 120
+      arrivalRate: 50
+      name: "Peak disruption simulation"
+
+scenarios:
+  - name: "File Claim Burst Flow"
+    flow:
+      - post:
+          url: "/api/v1/auth/login"
+          json:
+            phone_number: "{{ phone }}"
+            password: "password123"
+          capture:
+            - json: "$.data.access_token"
+              as: "token"
+      - post:
+          url: "/api/v1/claims"
+          headers:
+            Authorization: "Bearer {{ token }}"
+            Idempotency-Key: "{{ $randomString() }}"
+          json:
+            trigger_event_id: "{{ trigger_id }}"
+            policy_id: "{{ policy_id }}"
+            gps_lat: 12.934567
+            gps_lng: 77.610123

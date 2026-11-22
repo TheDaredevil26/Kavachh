@@ -1,0 +1,22 @@
+:root {
+  --oat: #EFE6D8;
+  --sand: #E3D3BA;
+  --biscuit: #D2BC9A;
+  --mocha: #8A6A4F;
+  --walnut: #5A4030;
+  --powder: #D4E7F2;
+  --sky: #A8D2EC;
+  --harbor: #5E9FC7;
+  --ink: #000000;
+  --ink-2: rgba(0, 0, 0, 0.72);
+  --ink-3: rgba(0, 0, 0, 0.48);
+  --sage: #A9D3A0;
+  --honey: #EBC15A;
+  --madder: #E07A7F;
+  --glass-1: rgba(255, 255, 255, 0.55);
+  --glass-2: rgba(255, 255, 255, 0.70);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 8px 32px rgba(90, 64, 48, 0.12);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

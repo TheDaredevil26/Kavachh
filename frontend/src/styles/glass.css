@@ -1,0 +1,79 @@
+/* ─── Glassmorphism System (§5.3) ─── */
+
+/* Level 1 — lightest frost */
+.glass-1 {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px rgba(90, 64, 48, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Level 2 — standard card */
+.glass-2 {
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.70);
+  box-shadow: 0 8px 32px rgba(90, 64, 48, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Level 3 — elevated panel / modal */
+.glass-3 {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 16px 48px rgba(90, 64, 48, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Level 4 — prominent hero / sheet */
+.glass-4 {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(32px) saturate(1.7);
+  -webkit-backdrop-filter: blur(32px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  box-shadow: 0 16px 48px rgba(90, 64, 48, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Level 5 — opaque surface (bottom sheet, nav bar) */
+.glass-5 {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(90, 64, 48, 0.16);
+}
+
+/* ─── Fallbacks for browsers without backdrop-filter ─── */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-1 { background: rgba(239, 230, 216, 0.92); }
+  .glass-2 { background: rgba(239, 230, 216, 0.95); }
+  .glass-3 { background: rgba(245, 240, 232, 0.97); }
+  .glass-4 { background: rgba(250, 247, 242, 0.98); }
+  .glass-5 { background: #FDFBF8; }
+}
+
+/* ─── Reduced transparency preference ─── */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-1,
+  .glass-2 { background: rgba(239, 230, 216, 0.95); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .glass-3,
+  .glass-4 { background: rgba(250, 247, 242, 0.98); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .glass-5 { background: #FDFBF8; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
+/* ─── Data-saver mode — drop all blur for perf ─── */
+[data-saver="on"] .glass-1,
+[data-saver="on"] .glass-2,
+[data-saver="on"] .glass-3,
+[data-saver="on"] .glass-4,
+[data-saver="on"] .glass-5 {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+[data-saver="on"] .glass-1 { background: rgba(239, 230, 216, 0.92); }
+[data-saver="on"] .glass-2 { background: rgba(239, 230, 216, 0.95); }
+[data-saver="on"] .glass-3 { background: rgba(245, 240, 232, 0.97); }
+[data-saver="on"] .glass-4 { background: rgba(250, 247, 242, 0.98); }
+[data-saver="on"] .glass-5 { background: #FDFBF8; }

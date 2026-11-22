@@ -1,0 +1,23 @@
+{
+  "name": "kavach",
+  "private": true,
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "db:migrate": "npm --workspace backend exec prisma migrate dev",
+    "db:seed": "npm --workspace backend exec prisma db seed",
+    "dev:gateway": "npm --workspace backend run dev:gateway",
+    "dev:worker": "npm --workspace backend run dev:worker-service",
+    "dev:policy": "npm --workspace backend run dev:policy-service",
+    "dev:trigger": "npm --workspace backend run dev:trigger-service",
+    "dev:claims": "npm --workspace backend run dev:claims-service",
+    "dev:notify": "npm --workspace backend run dev:notification-service",
+    "dev:ml": "cd ml && uvicorn inference_server:app --port 5000 --reload",
+    "dev:web": "npm --workspace frontend run dev",
+    "dev": "concurrently -n gw,wrk,pol,trg,clm,ntf,ml,web \"npm:dev:gateway\" \"npm:dev:worker\" \"npm:dev:policy\" \"npm:dev:trigger\" \"npm:dev:claims\" \"npm:dev:notify\" \"npm:dev:ml\" \"npm:dev:web\"",
+    "test": "npm --workspace backend test && cd ml && pytest",
+    "lint": "npm --workspace backend run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

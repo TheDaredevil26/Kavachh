@@ -1,0 +1,77 @@
+/* ─── Environment-Reactive Mesh Background (§5.4) ─── */
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Default / clear weather ─── */
+body::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(212, 231, 242, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 75% 70%, rgba(168, 210, 236, 0.30) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(169, 211, 160, 0.20) 0%, transparent 60%),
+    linear-gradient(180deg, #EFE6D8 0%, #E3D3BA 100%);
+}
+
+/* ─── Rain — cool blue-powder tones ─── */
+[data-env="rain"] body::before,
+body[data-env="rain"]::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 25%, rgba(94, 159, 199, 0.40) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 65%, rgba(212, 231, 242, 0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 45% 50%, rgba(168, 210, 236, 0.35) 0%, transparent 60%),
+    linear-gradient(180deg, #D4E7F2 0%, #E3D3BA 100%);
+}
+
+/* ─── Heat — warm sand/honey tones ─── */
+[data-env="heat"] body::before,
+body[data-env="heat"]::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(235, 193, 90, 0.40) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(210, 188, 154, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 45%, rgba(224, 122, 127, 0.20) 0%, transparent 60%),
+    linear-gradient(180deg, #E3D3BA 0%, #EFE6D8 100%);
+}
+
+/* ─── Air quality alert — muted sage overlay ─── */
+[data-env="air"] body::before,
+body[data-env="air"]::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 30%, rgba(169, 211, 160, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 65%, rgba(210, 188, 154, 0.40) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(138, 106, 79, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #EFE6D8 0%, #D2BC9A 100%);
+}
+
+/* ─── Offline — desaturated, muted ─── */
+[data-env="offline"] body::before,
+body[data-env="offline"]::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 30%, rgba(210, 188, 154, 0.30) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 65% 65%, rgba(227, 211, 186, 0.35) 0%, transparent 65%),
+    linear-gradient(180deg, #E3D3BA 0%, #D2BC9A 100%);
+  filter: saturate(0.6);
+}
+
+/* ─── Data-saver: simpler gradient, no multiple radials ─── */
+[data-saver="on"] body::before {
+  background: linear-gradient(180deg, #EFE6D8 0%, #E3D3BA 100%) !important;
+  filter: none !important;
+}
+
+/* ─── Reduced motion: skip transition ─── */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    transition: none;
+  }
+}
